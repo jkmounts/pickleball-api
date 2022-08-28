@@ -8,7 +8,7 @@ export function toNativeTypes(properties: any) {
   }))
 }
 
-function valueToNativeType(value: any) {
+export function valueToNativeType(value: any) {
   if ( Array.isArray(value) ) {
     value = value.map(innerValue => valueToNativeType(innerValue))
   }
