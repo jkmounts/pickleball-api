@@ -9,5 +9,11 @@ router.get('/', async (req,res) => {
 
   res.json(courts);
 })
+router.post('/', async (req,res) => {
+  const courtService = new CourtService;
+  const court = await courtService.add(req.body);
+
+  res.json(court);
+})
 
 export default router;
