@@ -1,19 +1,19 @@
-import { isInt, isDate, isDateTime, isTime, isLocalDateTime, isLocalTime, isDuration } from 'neo4j-driver'
+import { isInt, isDate, isDateTime, isTime, isLocalDateTime, isLocalTime, isDuration } from 'neo4j-driver';
 
 export function toNativeTypes(properties: any) {
   return Object.fromEntries(Object.keys(properties).map((key) => {
-    let value = valueToNativeType(properties[key])
+    const value = valueToNativeType(properties[key]);
 
-    return [ key, value ]
-  }))
+    return [ key, value ];
+  }));
 }
 
 export function valueToNativeType(value: any) {
   if ( Array.isArray(value) ) {
-    value = value.map(innerValue => valueToNativeType(innerValue))
+    value = value.map(innerValue => valueToNativeType(innerValue));
   }
   else if ( isInt(value) ) {
-    value = value.toNumber()
+    value = value.toNumber();
   }
   else if (
     isDate(value) ||
@@ -23,11 +23,11 @@ export function valueToNativeType(value: any) {
     isLocalTime(value) ||
     isDuration(value)
   ) {
-    value = value.toString()
+    value = value.toString();
   }
   else if (typeof value === 'object' && value !== undefined  && value !== null) {
-    value = toNativeTypes(value)
+    value = toNativeTypes(value);
   }
 
-  return value
+  return value;
 }

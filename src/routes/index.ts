@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import courts from './courts.routes';
 import auth from './auth.routes';
 import facilities from './facilities.routes';

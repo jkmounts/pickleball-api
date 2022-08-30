@@ -24,6 +24,6 @@ app.use(express.json());
 initDriver(NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD);
 
 // API ROUTES
-app.use(API_PREFIX || '/api', routes)
+app.use(API_PREFIX || '/api', routes);
 
 export default app;

@@ -11,9 +11,9 @@ type User = {
 
 export default class AuthService {
   userToClaims(user: User) {
-    const { name, userId } = user
+    const { name, userId } = user;
 
-    return { sub: userId, userId, name, }
+    return { sub: userId, userId, name, };
   }
   async register(email: string, plainPassword: string, name: string) {
     const encrypted = await hash(plainPassword, SALT_ROUNDS);
@@ -33,7 +33,7 @@ export default class AuthService {
     return {
       ...safeProperties,
       token: jwt.sign(this.userToClaims(safeProperties), JWT_SECRET)
-    }
+    };
     // TODO: Create Validation Constraints in dB (ie, no duplicate email)
   }
 }
