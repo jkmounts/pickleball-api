@@ -1,5 +1,4 @@
-import { toNativeTypes } from '../utils';
-import { createNode, read} from './db.service';
+import dbService from './db.service';
 
 type Court = {
   name: string,
@@ -12,12 +11,12 @@ export default class CourtService {
     const query = `
     MATCH (court:Court)
     return court`;
-    const res = await read(query);
-    return res.records.map(r => toNativeTypes(r.get('court')));
+    const res = await dbService.read(query);
+    return res;
   }
   
   async add(court: Court) {
-    const res = await createNode('Court', court);
+    const res = await dbService.createNode('Court', court);
     return res;
   }
 }

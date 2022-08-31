@@ -1,7 +1,7 @@
 import { hash, compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET, SALT_ROUNDS } from '../constants.js';
-import {read, write} from './db.service';
+import db from './db.service';
 
 type User = {
   userId: string,
@@ -26,8 +26,9 @@ export default class AuthService {
       })
       RETURN u`;
     const params = { email, encrypted, name };
-    const res = await write(query, params);
+    const res = await db.write(query, params);
     const node = res.records[0].get('u');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...safeProperties } = node.properties;
 
     return {

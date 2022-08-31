@@ -1,4 +1,4 @@
-import { createNode } from './db.service';
+import db from './db.service';
 
 type Facility = {
   name: string;
@@ -10,7 +10,7 @@ type Facility = {
 
 export default class FacilityService {
   async add(facility: Facility) {
-    const res = await createNode('Facility', facility);
+    const res = await db.createNode('Facility', facility);
     return res;
   }
 }
