@@ -11,6 +11,13 @@ describe('Court Service', () => {
       await courts.all();
       expect((dbService.read as jest.Mock).mock.calls.length).toBe(1);
     });
+    it('sends correct query', async () => {
+      (dbService.read as jest.Mock).mockResolvedValue('res');
+      const courts = new courtService();
+      await courts.all();
+      expect((dbService.read as jest.Mock).mock.calls[0][0]).toContain('MATCH (court:Court)');
+      expect((dbService.read as jest.Mock).mock.calls[0][0]).toContain('return court');
+    });
     it('returns response from db service', async () => {
       (dbService.read as jest.Mock).mockResolvedValue('some response object');
       const courts = new courtService();
