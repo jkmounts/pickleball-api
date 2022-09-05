@@ -1,4 +1,4 @@
-import db from './db.service';
+import dbService from './db.service';
 
 type Facility = {
   name: string;
@@ -10,7 +10,15 @@ type Facility = {
 
 export default class FacilityService {
   async add(facility: Facility) {
-    const res = await db.createNode('Facility', facility);
+    const res = await dbService.createNode('Facility', facility);
+    return res;
+  }
+
+  async all() {
+    const query = `
+    MATCH (facility:Facility)
+    return facility`;
+    const res = await dbService.read(query);
     return res;
   }
 }
