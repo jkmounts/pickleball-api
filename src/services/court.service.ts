@@ -1,9 +1,8 @@
 import dbService from './db.service';
 
 type Court = {
-  name: string,
-  city: string,
-  state: string,
+  name?: string,
+  number?: string,
 }
 
 export default class CourtService {
